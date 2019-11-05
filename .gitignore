@@ -1,2 +1,6 @@
 .vs
-DaVinci/Debug/*
+Debug/
+x64/
+*.swp
+*~
+*.user
