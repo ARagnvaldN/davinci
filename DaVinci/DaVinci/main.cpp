@@ -7,17 +7,16 @@ extern "C" {
 
 #include <cstdlib> // for rand and __argc/__argv
 
-#include <array>
+#include <vector>
 
 APP_U32 g_white = 0xffffff;
 APP_U32 g_black = 0x000000;
 
 int app_proc(app_t* app, void*)
 {
-	const size_t width = 320;
-	const size_t height = 200;
-	auto canvas = std::array<APP_U32, width * height>();			// Create a canvas
-	std::fill(std::begin(canvas), std::end(canvas), g_white);  // clear to white
+	const size_t width = 640;
+	const size_t height = 400;
+	auto canvas = std::vector<APP_U32>(width * height, g_white);  // Create a canvas and make it white
 	
 	app_screenmode(app, APP_SCREENMODE_WINDOW);  // As opposed to APP_SCREENMODE_FULLSCREEN
 
