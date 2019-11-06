@@ -1,18 +1,10 @@
-#define  APP_IMPLEMENTATION
-#define  APP_WINDOWS
-
-extern "C" {
-#include "app.h"
-}
-
-#include <cstdlib> // for rand and __argc/__argv
-
+#include "app_wrapper.h"
 #include <vector>
 
 APP_U32 g_white = 0xffffff;
 APP_U32 g_black = 0x000000;
 
-int app_proc(app_t* app, void*)
+int main_loop(app_t* app, void*)
 {
 	const size_t width = 640;
 	const size_t height = 400;
@@ -38,8 +30,5 @@ int app_proc(app_t* app, void*)
 int main(int argc, char** argv)
 {
 	(void)argc, argv;
-	return app_run(app_proc, NULL, NULL, NULL, NULL);
+	return davinci::register_process(main_loop);
 }
-
-// pass-through so the program will build with either /SUBSYSTEM:WINDOWS or /SUBSYSTEN:CONSOLE
-extern "C" int __stdcall WinMain(struct HINSTANCE__*, struct HINSTANCE__*, char*, int) { return main(__argc, __argv); }
